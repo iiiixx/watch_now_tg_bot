@@ -11,7 +11,7 @@ type Processor interface {
 type Type int
 
 const (
-	Unknow Type = iota
+	Unknown Type = iota
 	Message
 )
 

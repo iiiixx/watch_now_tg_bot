@@ -21,7 +21,7 @@ const (
 	sendMessageMethod = "sendMessage"
 )
 
-func New(host string, token string) Client {
+func New(host string, token string) *Client {
 	//Функция-конструктор, создающая новый экземпляр Client. Она принимает:
 	//host: Хост сервиса (например, "api.telegram.org").
 	//token: Токен бота, используемый для авторизации.
@@ -31,7 +31,7 @@ func New(host string, token string) Client {
 	//basePath формируется через функцию newBasePath.
 	//client инициализируется стандартным HTTP-клиентом.
 
-	return Client{
+	return &Client{
 		host:     host,
 		basePath: newBasePath(token),
 		client:   http.Client{},

@@ -2,8 +2,8 @@ package telegram
 
 import (
 	"errors"
+	"read_adviser_tg_bot/clients/telegram"
 	"read_adviser_tg_bot/events"
-	"read_adviser_tg_bot/events/telegram"
 	"read_adviser_tg_bot/lib/e"
 	"read_adviser_tg_bot/storage"
 )
@@ -62,7 +62,7 @@ func (p *Processor) Process(event events.Event) error {
 	case events.Message:
 		return p.processMessage(event)
 	default:
-		return e.Wrap("can't process message")
+		return e.Wrap("can't process message", ErrUnknownEventType)
 	}
 }
 
@@ -82,7 +82,7 @@ func (p *Processor) processMessage(event events.Event) error {
 func meta(event events.Event) (Meta, error) {
 	res, ok := event.Meta.(Meta)
 	if !ok {
-		return Meta{}, e.Wrap("can't get meta")
+		return Meta{}, e.Wrap("can't get meta", ErrUnknownMetaType)
 	}
 	return res, nil
 }
@@ -100,7 +100,7 @@ func event(upd telegram.Update) events.Event {
 	if updType == events.Message {
 		res.Meta = Meta{
 			ChatID:   upd.Message.Chat.ID,
-			Username: upd.Message.From.UserName,
+			Username: upd.Message.From.Username,
 		}
 	}
 
@@ -108,15 +108,14 @@ func event(upd telegram.Update) events.Event {
 
 }
 
-func fetchType(upd telegram.Update) events.Event {
+func fetchText(upd telegram.Update) string {
 	if upd.Message == nil {
 		return ""
 	}
 	return upd.Message.Text
-
 }
 
-func fetchText(upd telegram.Update) events.Event {
+func fetchType(upd telegram.Update) events.Type {
 	if upd.Message == nil {
 		return events.Unknown
 	}
