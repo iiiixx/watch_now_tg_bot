@@ -21,7 +21,9 @@ func New(fetcher events.Fetcher, processor events.Processor, batchSize int) Cons
 }
 
 func (c Consumer) Start() error {
+	//log.Println("starting consumer...") // Логируем начало работы
 	for {
+		//log.Println("fetching events...") // Логируем начало запроса на получение событий
 		gotEvents, err := c.fetcher.Fetch(c.batchSize)
 		if err != nil {
 			log.Printf("[ERR] consumer: %s", err.Error())
@@ -29,7 +31,12 @@ func (c Consumer) Start() error {
 			continue
 		}
 
+		//log.Printf("fetched %d events", len(gotEvents)) // Логируем количество полученных событий
+
 		if len(gotEvents) == 0 {
+
+			//log.Println("no events received, sleeping for 1 second...") // Логируем, если нет новых событий
+
 			time.Sleep(1 * time.Second)
 
 			continue
@@ -52,6 +59,8 @@ func (c Consumer) Start() error {
 3. Параллельная обработка
 */
 func (c *Consumer) handleEvents(events []events.Event) error {
+	//log.Printf("handling %d events", len(events)) // Логируем количество событий для обработки
+
 	for _, event := range events {
 		log.Printf("got new event: %s", event.Text)
 

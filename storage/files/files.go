@@ -73,6 +73,11 @@ func (s Storage) PickRandom(userName string) (page *storage.Page, err error) {
 	//получаем путь до директории с файлами
 	path := filepath.Join(s.basePath, userName)
 
+	//1. проверить список папок внутри storage, если нет папки пользователя то не пытаемся проверить список файлов
+	//просто сообщаем что ничего не сохранил
+
+	//2.создать папку
+
 	//получаем список файлов
 	files, err := os.ReadDir(path)
 	if err != nil {

@@ -70,6 +70,14 @@ func (c *Client) Updates(offset int, limit int) ([]Update, error) {
 	if err := json.Unmarshal(data, &res); err != nil {
 		return nil, err
 	}
+
+	/*log.Printf("Received %d updates from Telegram", len(res.Result))
+
+	// Теперь добавим логи для каждого обновления
+	for _, update := range res.Result {
+		log.Printf("Message text: %s", update.Message.Text)
+	}*/
+
 	//Из структуры UpdatesResponse возвращается поле Result, которое, является срезом объектов типа Update.
 	return res.Result, nil
 }

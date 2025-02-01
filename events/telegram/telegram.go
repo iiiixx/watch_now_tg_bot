@@ -35,6 +35,7 @@ func (p *Processor) Fetch(limit int) ([]events.Event, error) {
 	//получаем обновления
 	updates, err := p.tg.Updates(p.offset, limit)
 	if err != nil {
+		//log.Printf("[ERR] failed to fetch updates: %s", err.Error())
 		return nil, e.Wrap("can't get events", err)
 	}
 
@@ -53,6 +54,8 @@ func (p *Processor) Fetch(limit int) ([]events.Event, error) {
 
 	//обновляем offset чтобы в некст раз получить следующюю пачку изменений
 	p.offset = updates[len(updates)-1].ID + 1
+
+	//log.Printf("Updated offset: %d", p.offset)
 
 	return res, nil
 }

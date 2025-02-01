@@ -21,18 +21,23 @@ func (p *Processor) doCmd(text string, chatID int, username string) error {
 	log.Printf("got new command '%s' from '%s", text, username)
 
 	if isAddCmd(text) {
+		log.Println("recognized as URL, saving page...")
 		return p.savePage(chatID, text, username)
 	}
 
 	//add page: http://...
 	switch text {
 	case RndCmd:
+		log.Println("processing /rnd command...")
 		return p.sendRandom(chatID, username)
 	case HelpCmd:
+		log.Println("processing /help command...")
 		return p.sendHelp(chatID)
 	case StartCmd:
+		log.Printf("processing /start command for user: %s", username)
 		return p.sendHello(chatID)
 	default:
+		log.Println("unknown command received")
 		return p.tg.SendMessage(chatID, msgUnknownCommand)
 	}
 }
