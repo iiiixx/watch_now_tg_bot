@@ -13,5 +13,4 @@ Telegram-бот для сохранения ссылок на фильмы и в
 - /rnd – получить случайную ссылку (после выдачи она удаляется).
 - /list – показать все сохранённые ссылки.
 
-Use case с функционалом:
 <img width="785" alt="Untitled" src="https://github.com/user-attachments/assets/f04fea86-23cf-4ad5-8b89-038319ecfc86" />
