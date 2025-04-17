@@ -11,7 +11,7 @@ Telegram-бот для сохранения ссылок на фильмы и в
 
 Язык: Go
 
-База данных: SQLite3 ([github.com/mattn/go-sqlite3])
+База данных: SQLite3 [github.com/mattn/go-sqlite3](https://github.com/mattn/go-sqlite3)
 
 Функционал:
 - /start – приветствие и инструкция.
