@@ -10,7 +10,7 @@ const msgHello = "Yo, yo, yo! 🤙 \n\n" + msgHelp
 
 const (
 	msgUnknownCommand = "I'm confused💀"
-	msgNoSavedPages   = "you didn't save any films"
+	msgNoSavedPages   = "oops, nothing to show! you can send me a link🔗"
 	msgSaved          = "saved it!🤝"
 	msgAlreadyExists  = "this film is already on your list🐒"
 )

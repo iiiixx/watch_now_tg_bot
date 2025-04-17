@@ -2,10 +2,10 @@ package telegram
 
 import (
 	"errors"
-	"read_adviser_tg_bot/clients/telegram"
-	"read_adviser_tg_bot/events"
-	"read_adviser_tg_bot/lib/e"
-	"read_adviser_tg_bot/storage"
+	"tg_bot/clients/telegram"
+	"tg_bot/events"
+	"tg_bot/lib/e"
+	"tg_bot/storage"
 )
 
 type Processor struct {

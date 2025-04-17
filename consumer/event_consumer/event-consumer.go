@@ -2,7 +2,7 @@ package eventconsumer
 
 import (
 	"log"
-	"read_adviser_tg_bot/events"
+	"tg_bot/events"
 	"time"
 )
 

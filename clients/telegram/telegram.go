@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"net/url"
 	"path"
-	"read_adviser_tg_bot/lib/e"
 	"strconv"
+	"tg_bot/lib/e"
 )
 
 type Client struct {

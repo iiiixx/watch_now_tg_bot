@@ -11,8 +11,8 @@ import (
 	"math/rand"
 	"os"
 	"path/filepath"
-	"read_adviser_tg_bot/lib/e"
-	"read_adviser_tg_bot/storage"
+	"tg_bot/lib/e"
+	"tg_bot/storage"
 	"time"
 )
 

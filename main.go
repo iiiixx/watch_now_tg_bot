@@ -1,31 +1,44 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"log"
 
-	tgClient "read_adviser_tg_bot/clients/telegram"
-	"read_adviser_tg_bot/events/telegram"
-	"read_adviser_tg_bot/storage/files"
+	tgClient "tg_bot/clients/telegram"
+	"tg_bot/events/telegram"
+	"tg_bot/storage/sqlite"
 
-	eventconsumer "read_adviser_tg_bot/consumer/event_consumer"
+	eventconsumer "tg_bot/consumer/event_consumer"
 )
 
 //Для остановки службы: - sudo launchctl unload /Library/LaunchDaemons/com.example.bot.plist
 
 const (
-	tgBotHost   = "api.telegram.org"
-	storagePath = "files_storage"
-	batchSize   = 100
+	tgBotHost         = "api.telegram.org"
+	sqliteStoragePath = "data/sqlite/storage.db"
+	//storagePath = "files_storage"
+	batchSize = 100
 )
 
-// 8016999394:AAFC0MHyMbWPfveVkSfsRZppsSbwHAkAD3k
+// run with:
+// -tg-bot-token ''
 
 func main() {
+	// s := files.New(storagePath)
+	s, err := sqlite.New(sqliteStoragePath)
+	if err != nil {
+		log.Fatal("can't connect to storage: ", err)
+	}
+
+	if err := s.Init(context.TODO()); err != nil {
+		log.Fatal("can't init storage: ", err)
+	}
 
 	eventsProcessor := telegram.New(
 		tgClient.New(tgBotHost, mustToken()),
-		files.New(storagePath),
+		//files.New(storagePath),
+		s,
 	)
 
 	log.Print("service started")
